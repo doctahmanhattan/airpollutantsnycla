@@ -1,0 +1,49 @@
+---
+title: "Major Air Pollutants in NYC and Los Angeles 7-22-2024"
+author: "doctahmanhattan"
+output: 
+  html_document:
+    self_contained: yes
+---
+Introduction
+This presentation provides an analysis of major air pollutants in New York City (NYC) and Los Angeles. The pollutants considered in this analysis are PM2.5, PM10, and NO2.
+
+Data Summary
+The data used in this presentation is simulated for illustrative purposes.
+
+PM2.5: Fine particulate matter with a diameter of less than 2.5 micrometers.
+PM10: Particulate matter with a diameter of less than 10 micrometers.
+NO2: Nitrogen dioxide.
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(plotly)
+library(dplyr)
+```
+
+```{r}
+# Set up the data
+set.seed(123)
+data <- data.frame(
+  city = rep(c("NYC", "Los Angeles"), each = 100),
+  PM2.5 = c(rnorm(100, mean = 12, sd = 5), rnorm(100, mean = 18, sd = 7)),
+  PM10 = c(rnorm(100, mean = 25, sd = 10), rnorm(100, mean = 30, sd = 12)),
+  NO2 = c(rnorm(100, mean = 15, sd = 7), rnorm(100, mean = 20, sd = 8))
+  )
+
+```
+
+```{r}
+# Create a 3D scatter plot with Plotly
+plot <- plot_ly(data, x = ~PM2.5, y = ~PM10, z = ~NO2, color = ~city, colors = c('#1f77b4', '#ff7f0e')) %>%
+  add_markers() %>%
+  layout(scene = list(
+    xaxis = list(title = 'PM2.5'),
+    yaxis = list(title = 'PM10'),
+    zaxis = list(title = 'NO2')
+  ))
+```
+# Save the plot to an HTML object
+```{r} 
+plot
+```
